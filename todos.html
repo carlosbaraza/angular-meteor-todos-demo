@@ -15,38 +15,44 @@
     <div class="content-overlay"></div>
 
     <div id="content-container">
-      <div class="page lists-show">
+      <div class="page lists-show" ng-controller="ListShowController as vm">
         <nav class="js-title-nav">
-          <form class="js-todo-new todo-new input-symbol">
-            <input type="text" placeholder="Type to add new tasks">
+          <form class="js-todo-new todo-new input-symbol"
+                ng-submit="vm.insertTodo(vm.newTodo)">
+            <input type="text" placeholder="Type to add new tasks"
+                   ng-model="vm.newTodo">
             <span class="icon-add js-todo-add"></span>
           </form>
         </nav>
 
 
         <div class="content-scrollable list-items">
-          <div class="list-item checked">
+          <div class="list-item"
+               ng-repeat="todo in vm.todos"
+               ng-class="{ checked: todo.completed }">
             <label class="checkbox">
-              <input type="checkbox" checked="true" name="checked">
+              <input type="checkbox" name="checked"
+                     ng-checked="todo.completed"
+                     ng-model="todo.completed"
+                     ng-change="vm.saveTodo(todo)">
               <span class="checkbox-custom"></span>
             </label>
 
-            <input type="text" value="Task checked" placeholder="Task name">
-            <a class="js-delete-item delete-item" href="#"><span class="icon-trash"></span></a>
+            <input type="text"
+                   value="{{todo.title}}"
+                   placeholder="Task name"
+                   ng-model="todo.title"
+                   ng-change="vm.saveTodo(todo)">
+            <a class="js-delete-item delete-item" href="#"
+               ng-click="vm.deleteTodo(todo)">
+              <span class="icon-trash"></span>
+            </a>
           </div>
-          <div class="list-item">
-            <label class="checkbox">
-              <input type="checkbox" name="checked">
-              <span class="checkbox-custom"></span>
-            </label>
-
-            <input type="text" value="Task checked" placeholder="Task name">
-            <a class="js-delete-item delete-item" href="#"><span class="icon-trash"></span></a>
+          <div class="wrapper-message"
+               ng-if="todos.length === 0">
+            <div class="title-message">No tasks here</div>
+            <div class="subtitle-message">Add new tasks using the field above</div>
           </div>
-          <!-- <div class="wrapper-message"> -->
-          <!--   <div class="title-message">No tasks here</div> -->
-          <!--   <div class="subtitle-message">Add new tasks using the field above</div> -->
-          <!-- </div> -->
         </div>
       </div>
 
