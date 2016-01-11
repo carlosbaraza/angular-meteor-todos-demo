@@ -1,11 +1,11 @@
 <body>
-  <div id="container" class="{{menuOpen}} {{cordova}}">
+  <div id="container">
 
     <section id="menu">
       <div class="list-todos">
         <a class="js-new-list link-list-new"><span class="icon-plus"></span>New List</a>
 
-        <a href="{{pathFor 'listsShow'}}" class="list-todo {{activeListClass}}" title="{{name}}">
+        <a href="#" class="list-todo active">
           <span class="count-list">3</span>
           List
         </a>
@@ -25,7 +25,7 @@
 
 
         <div class="content-scrollable list-items">
-          <div class="list-item checked {{editingClass}}">
+          <div class="list-item checked">
             <label class="checkbox">
               <input type="checkbox" checked="true" name="checked">
               <span class="checkbox-custom"></span>
